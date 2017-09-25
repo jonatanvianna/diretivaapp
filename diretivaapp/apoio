@@ -1,0 +1,24 @@
+diretiva = Diretiva(id=1, date_entry=datetime(2017, 5, 30, 10, 32), status=False, main_ticket=278965, product="Email", description="Problemas com email, não escalonar. Realizar invertigação e repassar ao N2.", date_update=datetime.now())
+d = Diretiva(id=2, date_entry=datetime(2017, 5, 29, 21, 50), status=False, main_ticket=245287, product="Disco Virtual", description="Problemas com Disco Virtual, não escalonar. Repassar usuário para o Ronaldo (SUPSVC) e vincular ao Ticket 245287.", date_update=datetime.now())
+d = Diretiva(id=3, date_entry=datetime(2017, 5, 28, 10, 36), status=True, main_ticket=235897, product="0800 SAN", description="0800 SAN Fora do ar. Escalonar para Nivel 2 caso o SLA não seja cumprido, encerra as 21:00", date_update=datetime.now())
+d = Diretiva(id=4, date_entry=datetime(2017, 9, 23, 20, 6), status=False, main_ticket=666666, product="PAINEL DE DIRETIVAS", description="Em ajuste! em breve informações relevantes serão divulgadas aqui", date_update=datetime.now())
+d = Diretiva(id=5, date_entry=datetime(2017, 8, 31, 11, 57), status=False, main_ticket=226935, product="TERRAADS", description="Casos de problemas cartão de crédito no TerraADS, NÃO escalonar. Vincular ao Ticket principal 226935 e alimentar a subtarefa 225533.", date_update=datetime.now())
+d = Diretiva(id=6, date_entry=datetime(2017, 9, 7, 12, 32), status=False, main_ticket=246048, product="TERRAADS", description="Casos de problemas em impressões de dados no TerraADS, não devem ser escalonados. Devemos vincular ao Ticket principal 246048 e alimentar a subtarefa 246063.", date_update=datetime.now())
+d = Diretiva(id=7, date_entry=datetime(2017, 9, 8, 9, 40), status=False, main_ticket=251770, product="EMAIL", description='Casos de contas de caixa posta de usuários terra que apresentarem problemas de "Perda Repentina de Mensagens", vincular ao Ticket Principal "251770" e alimentar a subtarefa 251792. Para problemas de "Mensagens Duplicadas" já está resolvido (pela manhã do dia 30/09), caso entre algum ticket, validar se não é anterior a esta data.', date_update=datetime.now())
+d = Diretiva(id=8, date_entry=datetime(2017, 9, 11, 3, 22), status=False, main_ticket=249498, product="COPIA DE CONTEUDO", description="Cópias de conteúdo de caixa postal, solicitada por SI, em que uma, ou as duas cópias fiquem diferentes da origem, devemos vincular a solicitação Ticket principal 249498 e alimentar a Subtarefa 249806.", date_update=datetime.now())
+d = Diretiva(id=9, date_entry=datetime(2017, 9, 13, 10, 45), status=False, main_ticket=278956, product="CONSUMER HUB", description="A plataforma foi atualizada (pool chb-idp0[1-2]-mia). Qualquer problema ou anormalidade, avisar os responáveis (SUPSVC - Cirolini/Rossano)", date_update=datetime.now())
+
+
+from diretiva.models import Diretiva
+from diretiva.serializers import DiretivaSerializer
+from rest_framework.renderers import JSONRenderer
+from rest_framework.parsers import JSONParser
+from django.utils.six import BytesIO
+from datetime import datetime
+
+
+serializer = DiretivaSerializer(diretiva)
+content = JSONRenderer().render(serializer.data)
+stream = BytesIO(content)
+data = JSONParser().parse(stream)
+serializer = DiretivaSerializer(data=data)
