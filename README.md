@@ -1,2 +1,2 @@
 ### diretivaapp
-Django Rest Framework - Class Based Viewa Test | Django
+Django Rest Framework - Class Based View CRUD Test | Django MCV
